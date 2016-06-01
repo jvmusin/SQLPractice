@@ -40,15 +40,20 @@ namespace Tests.Tests
             var hash = "passHash";
             var userId = Guid.NewGuid();
             var userEntity = new UserEntity();
+            var executor = NewMock<IQueryExecutor>();
 
             using (mockRepository.Record())
             {
-                userRepositoryFactory.Expect(f => f.Create()).Return(userRepository);
-                userRepository.Expect(f => f.Find(login)).Return(null);
+                queryExecutorFactory.Expect(f => f.Create()).Return(executor);
+                executor.Expect(f => f.Execute<IUserRepository, UserEntity>(h => h.Find(login)))
+                    .IgnoreArguments()
+                    .Return(null);
                 passwordHasher.Expect(f => f.Hash(password)).Return(hash);
                 guidFactory.Expect(f => f.Create()).Return(userId);
                 userEntityFactory.Expect(f => f.Create(login, userId, hash)).Return(userEntity);
-                userRepository.Expect(f => f.Create(userEntity));
+                executor.Expect(f => f.Execute<IUserRepository>(h => h.Create(userEntity))).IgnoreArguments();
+
+                executor.Stub(f => f.Dispose());
             }
 
             userService.Register(login, password);
@@ -60,11 +65,17 @@ namespace Tests.Tests
             var password = "pass";
             var login = "login";
             var hash = "passHash";
+            var entity = new UserEntity();
+            var executor = NewMock<IQueryExecutor>();
 
             using (mockRepository.Record())
             {
-                userRepositoryFactory.Expect(f => f.Create()).Return(userRepository);
-                userRepository.Expect(f => f.Find(login)).Return(new UserEntity());
+                queryExecutorFactory.Expect(f => f.Create()).Return(executor);
+                executor.Expect(f => f.Execute<IUserRepository, UserEntity>(h => h.Find(login)))
+                    .IgnoreArguments()
+                    .Return(entity);
+
+                executor.Stub(f => f.Dispose());
             }
 
             Assert.Throws<Exception>(() => userService.Register(login, password));

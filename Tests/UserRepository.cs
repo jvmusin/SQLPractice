@@ -10,7 +10,7 @@ namespace Tests
 
         public UserRepository()
         {
-            this.dataContext = new DataContext();
+            dataContext = new DataContext();
         }
 
         public UserEntity Find(string login)

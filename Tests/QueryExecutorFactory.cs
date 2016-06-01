@@ -1,12 +1,10 @@
-﻿using System;
-
-namespace Tests.Tests
+﻿namespace Tests
 {
     public class QueryExecutorFactory : IQueryExecutorFactory
     {
         public IQueryExecutor Create()
         {
-            throw new NotImplementedException();
+            return new QueryExecutor();
         }
     }
 }
