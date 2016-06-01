@@ -10,7 +10,7 @@ namespace Tests.Tests
 
         public override void SetUp()
         {
-            userService = new UserService(new PasswordHasher(), new GuidFactory(), new UserEntityFactory(), new UserRepositoryFactory());
+            userService = new UserService(new PasswordHasher(), new GuidFactory(), new UserEntityFactory(), new QueryExecutorFactory());
         }
 
         [Test]

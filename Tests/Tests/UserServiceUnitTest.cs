@@ -12,6 +12,7 @@ namespace Tests.Tests
         private IGuidFactory guidFactory;
         private IUserEntityFactory userEntityFactory;
         private IUserRepositoryFactory userRepositoryFactory;
+        private IQueryExecutorFactory queryExecutorFactory;
 
         public override void SetUp()
         {
@@ -22,7 +23,8 @@ namespace Tests.Tests
             guidFactory = NewMock<IGuidFactory>();
             userEntityFactory = NewMock<IUserEntityFactory>();
             userRepositoryFactory = NewMock<IUserRepositoryFactory>();
-            userService = new UserService(passwordHasher, guidFactory, userEntityFactory, userRepositoryFactory);
+            queryExecutorFactory = NewMock<IQueryExecutorFactory>();
+            userService = new UserService(passwordHasher, guidFactory, userEntityFactory, queryExecutorFactory);
 
             using (mockRepository.Record())
             {
@@ -57,7 +59,7 @@ namespace Tests.Tests
         {
             var password = "pass";
             var login = "login";
-            var hash = "passHash";            
+            var hash = "passHash";
 
             using (mockRepository.Record())
             {

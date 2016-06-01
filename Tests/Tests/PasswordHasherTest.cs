@@ -23,7 +23,7 @@ namespace Tests.Tests
             Assert.AreEqual(hash, equalHash);
 
             var incrorrect = passwordHaser.Hash("pass2");
-            
+
             Assert.AreNotEqual(hash, incrorrect);
         }
 

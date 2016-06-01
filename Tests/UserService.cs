@@ -42,7 +42,7 @@ namespace Tests
             UserEntity entity;
             using (var queryExecutor = queryExecutorFactory.Create())
             {
-                entity = queryExecutor.Execute<UserRepository, UserEntity>(h=>h.Find(login));
+                entity = queryExecutor.Execute<UserRepository, UserEntity>(h => h.Find(login));
             }
 
             if (entity == null)
