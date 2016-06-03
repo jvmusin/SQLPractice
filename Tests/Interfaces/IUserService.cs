@@ -1,4 +1,6 @@
-﻿namespace Tests
+﻿using Tests.Implementations;
+
+namespace Tests.Interfaces
 {
     public interface IUserService
     {

@@ -1,10 +1,12 @@
-﻿namespace Tests
+﻿using Tests.Interfaces;
+
+namespace Tests.Implementations
 {
     public class QueryExecutorFactory : IQueryExecutorFactory
     {
         public IQueryExecutor Create()
         {
-            return new QueryExecutor();
+            return new QueryExecutor(new RepositoryFactory());
         }
     }
 }

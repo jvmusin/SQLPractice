@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Data.Linq.Mapping;
 
-namespace Tests
+namespace Tests.Implementations
 {
     [Table(Name = "Users")]
     public class UserEntity

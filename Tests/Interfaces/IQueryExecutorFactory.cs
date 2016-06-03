@@ -1,4 +1,4 @@
-namespace Tests
+namespace Tests.Interfaces
 {
     public interface IQueryExecutorFactory
     {

@@ -1,8 +1,9 @@
 ﻿using System;
+using Tests.Implementations;
 
-namespace Tests
+namespace Tests.Interfaces
 {
-    public interface IUserRepository : IDisposable
+    public interface IUserRepository
     {
         UserEntity Find(string login);
         void Delete(Guid userId);

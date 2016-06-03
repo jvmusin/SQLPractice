@@ -1,6 +1,7 @@
 ﻿using System;
+using Tests.Interfaces;
 
-namespace Tests
+namespace Tests.Implementations
 {
     public class GuidFactory : IGuidFactory
     {

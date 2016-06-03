@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Tests
+namespace Tests.Interfaces
 {
     public interface IGuidFactory
     {

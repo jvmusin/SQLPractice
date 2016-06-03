@@ -1,6 +1,7 @@
 ﻿using System;
+using Tests.Interfaces;
 
-namespace Tests
+namespace Tests.Implementations
 {
     public class UserService : IUserService
     {
@@ -42,7 +43,7 @@ namespace Tests
             UserEntity entity;
             using (var queryExecutor = queryExecutorFactory.Create())
             {
-                entity = queryExecutor.Execute<UserRepository, UserEntity>(h => h.Find(login));
+                entity = queryExecutor.Execute<IUserRepository, UserEntity>(h => h.Find(login));
             }
 
             if (entity == null)

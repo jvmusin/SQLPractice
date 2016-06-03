@@ -1,6 +1,7 @@
 ﻿using System;
+using Tests.Implementations;
 
-namespace Tests
+namespace Tests.Interfaces
 {
     public interface IUserEntityFactory
     {

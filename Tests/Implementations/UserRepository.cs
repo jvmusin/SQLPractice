@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Linq;
 using Tests.DB;
+using Tests.Interfaces;
 
-namespace Tests
+namespace Tests.Implementations
 {
     public class UserRepository : IUserRepository
     {
         private readonly IDataContext dataContext;
 
-        public UserRepository()
+        public UserRepository(IDataContext dataContext)
         {
-            dataContext = new DataContext();
+            this.dataContext = dataContext;
         }
 
         public UserEntity Find(string login)
@@ -21,21 +22,15 @@ namespace Tests
         public void Delete(Guid userId)
         {
             var entity = dataContext.GetTable<UserEntity>().FirstOrDefault(x => x.UserId == userId);
-            if (entity == null)
-            {
-                return;
-            }
-            dataContext.Delete(entity);
+            if (entity != null)
+                dataContext.Delete(entity);
         }
 
         public void Create(UserEntity userEntity)
         {
-
             var entity = Find(userEntity.Login);
             if (entity != null)
-            {
                 throw new Exception("Fck");
-            }
 
             dataContext.Create(userEntity);
         }
@@ -49,11 +44,6 @@ namespace Tests
             existUser.PasswordHash = userEntity.PasswordHash;
 
             dataContext.Update();
-        }
-
-        public void Dispose()
-        {
-            dataContext.Dispose();
         }
     }
 }
