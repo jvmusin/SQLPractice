@@ -9,7 +9,11 @@ namespace Tests.DB
 
         public DataContext()
         {
-            dataContext = new System.Data.Linq.DataContext(new SqlConnection("Server=(local);Database=Test;user id=us;password=us123"));
+            var connection = new SqlConnection(
+                "Data Source=(local);" +
+                "Initial Catalog=Test;" +
+                "Integrated Security=SSPI");
+            dataContext = new System.Data.Linq.DataContext(connection);
         }
 
         public IQueryable<T> GetTable<T>() where T : class

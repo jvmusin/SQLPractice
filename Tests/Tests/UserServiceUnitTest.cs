@@ -58,7 +58,6 @@ namespace Tests.Tests
         {
             var password = "pass";
             var login = "login";
-            var hash = "passHash";
             var entity = new UserEntity();
             var executor = NewMock<IQueryExecutor>();
 
